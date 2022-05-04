@@ -104,11 +104,16 @@ var generateBtn = document.querySelector("#generate");
 var min = 8;
 var max = 60;
   var validatePasslength = function() {
-    var lengthChoice = window.prompt("Enter desired password length between 8 - 60", 16);
-      if (lengthChoice < min) {
+    var lengthChoice = window.prompt("Enter desired password length between 8 - 60");
+        if (lengthChoice === null) {
+        console.log("null")
+        return;
+      } else if (lengthChoice < min) {
         window.alert("Invalid Entry; Entry too small");
+        validatePasslength();
       } else if (lengthChoice > max) {
         window.alert("Invalid Entry; Entry too large");
+        validatePasslength();
       } else {
         console.log("You've entered " + lengthChoice);
       }
@@ -116,8 +121,11 @@ var max = 60;
   }
 
   var validateChars = function() {
-    var charChoice = window.prompt("Use both lowercase and uppercase characters? (yes or no)", "yes");
-      if (charChoice === "yes") {
+    var charChoice = window.prompt("Use both lowercase and uppercase characters? ('yes' or 'no')");
+        if (charChoice === null) {
+        console.log("null")
+        return;
+      } else if (charChoice === "yes") {
         console.log("Use both upper and lowercase letters");
       } else if (charChoice === "no") {
         upLowChoice();
@@ -130,7 +138,10 @@ var max = 60;
 
   var upLowChoice = function() {
     var charChoice = window.prompt("Use only lowercase or uppercase letters? (Enter 'upper' or 'lower')");
-    if (charChoice === "upper") {
+      if (charChoice === null) {
+      console.log("null")
+      return;
+    } else if (charChoice === "upper") {
       console.log("Use only uppercase letters");
     } else if (charChoice === "lower") {
       console.log("Use only lowercase letters");
@@ -142,8 +153,11 @@ var max = 60;
   }
 
   var useSpecial = function() {
-    var specialChoice = window.prompt("Use special characters? (yes or no)", "yes");
-    if (specialChoice === "yes") {
+    var specialChoice = window.prompt("Use special characters? ('yes or no')", "yes");
+      if (specialChoice === null) {
+      console.log("null")
+      return;
+    } else if (specialChoice === "yes") {
       console.log("Use special characters.");
     } else if (specialChoice === "no") {
       console.log("Do not use special characters.");
@@ -155,8 +169,11 @@ var max = 60;
   }
 
   var useNumbers = function() {
-    var numChoice = window.prompt("Use numbers? (yes or no)", "yes");
-    if (numChoice === "yes") {
+    var numChoice = window.prompt("Use numbers? ('yes' or 'no')", "yes");
+      if (numChoice === null) {
+      console.log("null")
+      return;
+    } else if (numChoice === "yes") {
       console.log("Use numbers.");
     } else if (numChoice === "no") {
       console.log("Do not use numbers.");
@@ -164,6 +181,7 @@ var max = 60;
       window.alert("Invalid Entry; Input must be 'yes' or 'no'");
       useNumbers();
     }
+    return numChoice
   }
 
 // Write password to the #password input
