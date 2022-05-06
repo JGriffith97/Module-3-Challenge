@@ -108,6 +108,10 @@ var confirmSpec =
 var confirmNum =
 [];
 
+var lengthChoice;
+var charChoice;
+var specialChoice;
+var numChoice;
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
@@ -178,8 +182,8 @@ var generateBtn = document.querySelector("#generate");
         return;
       } else if (specialChoice === "yes") {
         console.log("Use special characters.");
-        confirmSpec = confirmPass.concat(special);
-        console.log(confirmSpec);
+        // confirmSpec = confirmPass.concat(special);
+        console.log(specialChoice);
       } else if (specialChoice === "no") {
         console.log("Do not use special characters.");
       } else {
@@ -197,8 +201,8 @@ var generateBtn = document.querySelector("#generate");
         return;
       } else if (numChoice === "yes") {
         console.log("Use numbers.");
-        confirmNum = confirmSpec.concat(numbers);
-        console.log(confirmNum);
+        // confirmNum = confirmSpec.concat(numbers);
+        console.log(numChoice);
       } else if (numChoice === "no") {
         console.log("Do not use numbers.");
       } else {
@@ -210,11 +214,11 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
+  var password = generatePassword();
   var lengthChoice = validatePasslength();
   var charChoice = validateChars();
   var specialChoice = useSpecial();
   var numChoice = useNumbers();
-  var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
@@ -223,11 +227,32 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", () => {
-  let letters = charChoice;
-    if (specialChoice === "yes" && numChoice === "yes")
+  writePassword()
+  let letters = confirmPass;
+  
+    if (specialChoice === "yes" && numChoice === "yes") {
       letters += numbers, special;
-    else if (specialChoice === "yes" && numChoice === "no")
+      passwordText = generatePassword(length.value, letters)
+    } else if (specialChoice === "yes" && numChoice === "no") {
       letters += special;
-    else if (specialChoice === "no" && numChoice === "yes")
+      passwordText = generatePassword(length.value, letters)
+    } else if (specialChoice === "no" && numChoice === "yes") {
       letters += numbers;
+      passwordText = generatePassword(length.value, letters)
+    } else if (specialChoice === "no" && numChoice === "no") {
+      letters;
+    } else {
+    return
+  };
+  return
 });
+
+var generatePassword = (length, characters) => {
+  let passwordText = "";
+  for (let i = 0; i < length; i++) {
+  passwordText += letters.at(
+      Math.floor(Math.random() * characters.length)
+    );
+  }
+  return passwordText;
+}
