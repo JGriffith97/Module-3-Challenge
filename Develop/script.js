@@ -212,6 +212,13 @@ var generateBtn = document.querySelector("#generate");
       return numChoice
     }
 
+    var password = "";
+    for (let i = 0; i < lengthChoice; i++) {
+    passwordText += letters.at(
+        Math.floor(Math.random() * characters.length)
+      );
+    }
+
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
@@ -226,33 +233,25 @@ function writePassword() {
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", () => {
-  writePassword()
-  let letters = confirmPass;
-  
-    if (specialChoice === "yes" && numChoice === "yes") {
-      letters += numbers, special;
-      passwordText = generatePassword(length.value, letters)
-    } else if (specialChoice === "yes" && numChoice === "no") {
-      letters += special;
-      passwordText = generatePassword(length.value, letters)
-    } else if (specialChoice === "no" && numChoice === "yes") {
-      letters += numbers;
-      passwordText = generatePassword(length.value, letters)
-    } else if (specialChoice === "no" && numChoice === "no") {
-      letters;
-    } else {
-    return
-  };
-  return
-});
+generateBtn.addEventListener("click", writePassword);
 
-var generatePassword = (length, characters) => {
-  let passwordText = "";
-  for (let i = 0; i < length; i++) {
-  passwordText += letters.at(
-      Math.floor(Math.random() * characters.length)
-    );
-  }
-  return passwordText;
-}
+// generateBtn.addEventListener("click", () => {
+//   writePassword()
+//   let letters = confirmPass;
+  
+//     if (specialChoice === "yes" && numChoice === "yes") {
+//       letters += numbers, special;
+//       passwordText = generatePassword(length.value, letters)
+//     } else if (specialChoice === "yes" && numChoice === "no") {
+//       letters += special;
+//       passwordText = generatePassword(length.value, letters)
+//     } else if (specialChoice === "no" && numChoice === "yes") {
+//       letters += numbers;
+//       passwordText = generatePassword(length.value, letters)
+//     } else if (specialChoice === "no" && numChoice === "no") {
+//       letters;
+//     } else {
+//     return
+//   };
+//   return
+// });
