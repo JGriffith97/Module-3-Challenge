@@ -26,7 +26,7 @@ var upperCharacters =
 "Y",
 "Z"]
 
-var underCharacters = 
+var lowerCharacters = 
 ["a",
 "b",
 "c",
@@ -126,7 +126,8 @@ var max = 60;
         console.log("null")
         return;
       } else if (charChoice === "yes") {
-        console.log("Use both upper and lowercase letters");
+        var confirmPass = upperCharacters.concat(lowerCharacters);
+        console.log(confirmPass)
       } else if (charChoice === "no") {
         upLowChoice();
       } else {
@@ -142,9 +143,11 @@ var max = 60;
       console.log("null")
       return;
     } else if (charChoice === "upper") {
-      console.log("Use only uppercase letters");
+      var confirmPass = upperCharacters;
+      console.log(confirmPass)
     } else if (charChoice === "lower") {
-      console.log("Use only lowercase letters");
+      var confirmPass = lowerCharacters;
+      console.log(confirmPass)
     } else {
       window.alert("Invalid Entry; Input must be 'upper' or 'lower'");
       upLowChoice();
@@ -158,6 +161,7 @@ var max = 60;
       console.log("null")
       return;
     } else if (specialChoice === "yes") {
+      console.log(charChoice)
       console.log("Use special characters.");
     } else if (specialChoice === "no") {
       console.log("Do not use special characters.");
