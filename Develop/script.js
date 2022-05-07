@@ -99,18 +99,21 @@ var numbers =
 "8",
 "9"]
 
-var confirmPassBoth = 
+var confirmFinal =
 [];
-var confirmPass =
+
+var charChoiceFinal =
 [];
-var confirmSpec =
+
+var specChoiceFinal =
 [];
-var confirmNum =
+
+var numChoiceFinal =
 [];
 
 var lengthChoice;
 var charChoice;
-var specialChoice;
+var specChoice;
 var numChoice;
 
 // Assignment Code
@@ -121,52 +124,69 @@ var generateBtn = document.querySelector("#generate");
   var min = 8;
   var max = 128;
     var validatePasslength = function() {
-      var lengthChoice = window.prompt("Enter desired password length between 8 - 128");
+      lengthChoice = window.prompt("Enter desired password length between 8 - 128");
+
           if (lengthChoice === null) {
-          console.log("null")
           return;
+
         } else if (lengthChoice < min) {
           window.alert("Invalid Entry; Entry too small");
           validatePasslength();
+
         } else if (lengthChoice > max) {
           window.alert("Invalid Entry; Entry too large");
           validatePasslength();
+
         } else {
           console.log("You've entered " + lengthChoice);
+          charValidation()
         }
         return lengthChoice
     }
 
 // Funtion for determining whether to use both uppercase and lowercase letters, or one of the two
     var validateChars = function() {
-      var charChoice = window.prompt("Use both lowercase and uppercase characters? ('yes' or 'no')");
+      charChoice = window.prompt("Use both lowercase and uppercase characters? ('yes' or 'no')");
+
           if (charChoice === null) {
           console.log("null")
           return;
+
         } else if (charChoice === "yes") {
-          confirmPass = upperCharacters.concat(lowerCharacters);
-          console.log(confirmPass)
+          console.log("yes")
+          charChoiceFinal = upperCharacters.concat(lowerCharacters)
+          console.log(charChoiceFinal)
+
         } else if (charChoice === "no") {
+          console.log("no")
           upLowChoice();
+
         } else {
           window.alert("Invalid Entry; Input must be 'yes' or 'no'");
           validateChars();
+
         }
         return charChoice
     }
 
 // As previously stated, function for determining whether to use upper, or lowercase letters, in the event using both is declined
     var upLowChoice = function() {
-      var charChoice = window.prompt("Use only lowercase or uppercase letters? (Enter 'upper' or 'lower')");
+      charChoice = window.prompt("Use only lowercase or uppercase letters? (Enter 'upper' or 'lower')");
+
         if (charChoice === null) {
         console.log("null")
         return;
+
       } else if (charChoice === "upper") {
-        confirmPass = upperCharacters;
-        console.log(confirmPass);
+        charChoiceFinal = upperCharacters
+        console.log(charChoiceFinal);
+        specValidation()
+
       } else if (charChoice === "lower") {
-        confirmPass = lowerCharacters;
-        console.log(confirmPass);
+        charChoiceFinal = lowerCharacters
+        console.log(charChoiceFinal);
+        specValidation()
+
       } else {
         window.alert("Invalid Entry; Input must be 'upper' or 'lower'");
         upLowChoice();
@@ -176,60 +196,109 @@ var generateBtn = document.querySelector("#generate");
 
 // Function for determining whether or not to add special characters 
     var useSpecial = function() {
-      var specialChoice = window.prompt("Use special characters? ('yes or no')", "yes");
-        if (specialChoice === null) {
+      specChoice = window.prompt("Use special characters? ('yes or no')", "yes");
+
+        if (specChoice === null) {
         console.log("null")
         return;
-      } else if (specialChoice === "yes") {
-        console.log("Use special characters.");
-        // confirmSpec = confirmPass.concat(special);
-        console.log(specialChoice);
-      } else if (specialChoice === "no") {
+
+      } else if (specChoice === "yes") {
+        console.log("yes")
+        specChoiceFinal = special;
+        console.log(specChoiceFinal)
+        numValidation()
+
+      } else if (specChoice === "no") {
+        console.log("no")
         console.log("Do not use special characters.");
+        numValidation()
+
       } else {
         window.alert("Invalid Entry; Input must be 'yes' or 'no'");
         useSpecial();
+
       }
-      return specialChoice
+      return specChoice
     }
 
 // Function for determining whether or not to add numbers
     var useNumbers = function() {
-      var numChoice = window.prompt("Use numbers? ('yes' or 'no')", "yes");
+      numChoice = window.prompt("Use numbers? ('yes' or 'no')", "yes");
+
         if (numChoice === null) {
         console.log("null")
         return;
+
       } else if (numChoice === "yes") {
-        console.log("Use numbers.");
-        // confirmNum = confirmSpec.concat(numbers);
-        console.log(numChoice);
+        numChoiceFinal = numbers;
+        console.log(numChoiceFinal);
+        combineArray()
+
       } else if (numChoice === "no") {
         console.log("Do not use numbers.");
+        combineArray()
+
       } else {
         window.alert("Invalid Entry; Input must be 'yes' or 'no'");
         useNumbers();
+
       }
       return numChoice
     }
 
+// Function to combine the different arrays, to eventually be converted into a string
+    var combine = function() {
+
+        if (numChoice === "no" && specChoice === "yes") {
+          confirmFinal = charChoiceFinal.concat(specChoiceFinal);
+          console.log(confirmFinal);
+
+        } else if (specChoice === "no" && numChoice === "yes") {
+          confirmFinal = charChoiceFinal.concat(numChoiceFinal);
+          console.log(confirmFinal);
+
+        } else if (specChoice === "no" && numChoice === "no") {
+          confirmFinal = charChoiceFinal
+          console.log(confirmFinal)
+
+        } else if (numChoice && specChoice === "yes") {
+          console.log("All options applied.")
+          confirmFinal = charChoiceFinal.concat(specChoiceFinal.numChoiceFinal);
+          console.log(confirmFinal);
+
+      }
+      return confirmFinal
+    } 
+
     var password = "";
     for (let i = 0; i < lengthChoice; i++) {
     passwordText += letters.at(
-        Math.floor(Math.random() * characters.length)
+        Math.floor(Math.random() * confirmFinal.length)
       );
     }
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
   var lengthChoice = validatePasslength();
+}
+function charValidation() {
   var charChoice = validateChars();
-  var specialChoice = useSpecial();
+}
+function specValidation() {
+  var specChoice = useSpecial();
+}
+function numValidation() {
   var numChoice = useNumbers();
+}
+function combineArray() {
+  var confirmFinal = combine();
+}
+
+function genPassword() {
+  var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
@@ -239,19 +308,21 @@ generateBtn.addEventListener("click", writePassword);
 //   writePassword()
 //   let letters = confirmPass;
   
-//     if (specialChoice === "yes" && numChoice === "yes") {
+//     if (specChoice === "yes" && numChoice === "yes") {
 //       letters += numbers, special;
 //       passwordText = generatePassword(length.value, letters)
-//     } else if (specialChoice === "yes" && numChoice === "no") {
+//     } else if (specChoice === "yes" && numChoice === "no") {
 //       letters += special;
 //       passwordText = generatePassword(length.value, letters)
-//     } else if (specialChoice === "no" && numChoice === "yes") {
+//     } else if (specChoice === "no" && numChoice === "yes") {
 //       letters += numbers;
 //       passwordText = generatePassword(length.value, letters)
-//     } else if (specialChoice === "no" && numChoice === "no") {
+//     } else if (specChoice === "no" && numChoice === "no") {
 //       letters;
 //     } else {
 //     return
 //   };
 //   return
 // });
+
+// includes, see if something from each array is included
