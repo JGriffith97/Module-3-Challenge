@@ -1,4 +1,4 @@
-var upperCharacters = 
+const upperCharacters = 
 ["A",
 "B",
 "C",
@@ -26,7 +26,7 @@ var upperCharacters =
 "Y",
 "Z"]
 
-var lowerCharacters = 
+const lowerCharacters = 
 ["a",
 "b",
 "c",
@@ -54,7 +54,7 @@ var lowerCharacters =
 "y",
 "z"]
 
-var special = 
+const special = 
 ["!",
 "`",
 "~",
@@ -87,7 +87,7 @@ var special =
 ">",
 "?"]
 
-var numbers = 
+const numbers = 
 ["0",
 "1",
 "2",
@@ -114,25 +114,64 @@ var specChoiceFinal =
 var numChoiceFinal =
 [];
 
-var stringFinal =
+var randomPass =
 [];
+
+var passwordText = document.querySelector("#password");
 
 var lengthChoice;
 var charChoice;
 var specChoice;
 var numChoice;
+var clearContinue;
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-
 // Function for determining password length
+    var clearText = function() {
+      console.log(passwordText.value)
+      if (passwordText.value !== "") {
+        clearConfirm();
+
+      } else {
+        validatePasslength();
+        console.log
+    }
+  }
+
+    var clearConfirm = function() {
+      clearContinue = window.confirm("Clear previous password?")
+      
+      if (clearContinue === true) {
+        passwordText.value = "";
+        stringFinal = "";
+        console.log(stringFinal)
+        password = [];
+        confirmFinal = []
+        charChoiceFinal = []
+        specChoiceFinal = []
+        numChoiceFinal = []
+        lengthChoice = null;
+        console.log(lengthChoice)
+        charChoice = null;
+        specChoice = null;
+        numChoice = null;
+        window.alert("Okay! Hit the 'generate password' button again if you wish to generate another password.")
+
+
+      } else {
+        return
+      }
+  }
+
   var min = 8;
   var max = 128;
     var validatePasslength = function() {
       lengthChoice = window.prompt("Enter desired password length between 8 - 128");
 
           if (lengthChoice === null) {
+          console.log(passwordText.value)
           return;
 
         } else if (lengthChoice < min) {
@@ -143,6 +182,10 @@ var generateBtn = document.querySelector("#generate");
           window.alert("Invalid Entry; Entry too large");
           validatePasslength();
 
+        } else if (isNaN(lengthChoice)) {
+          window.alert("Not a number")
+          validatePasslength();
+      
         } else {
           console.log("You've entered " + lengthChoice);
           charValidation()
@@ -292,13 +335,12 @@ var generateBtn = document.querySelector("#generate");
       return
     }
 
-      var postPassword = function() {
-        stringFinal = password.join('')
-        console.log(stringFinal)
-        console.log(typeof password)
-        var passwordText = document.querySelector("#password");
-        passwordText.value = stringFinal;
-      }
+    var postPassword = function() {
+      stringFinal = password.join('')
+      console.log(stringFinal)
+      console.log(typeof password)
+      passwordText.value = stringFinal;
+    }
     
 
 // Write password to the #password input
@@ -326,8 +368,7 @@ function showPassword() {
   var output = postPassword();
 }
 
-
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", clearText);
 
 // includes, see if something from each array is included
