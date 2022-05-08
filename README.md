@@ -4,6 +4,6 @@
 
 Screenshot: ![Site Screenshot](./Site%20Screenshot%20Module%203.png)
 
-Open main code file (JS): [logic](./Develop/script.js)
+Open main code file (JS): [Script](./Develop/script.js)
 
-Live site: (wait)
+Live site: https://jgriffith97.github.io/Module-3-Challenge/
