@@ -99,6 +99,9 @@ var numbers =
 "8",
 "9"]
 
+var password =
+[];
+
 var confirmFinal =
 [];
 
@@ -109,6 +112,9 @@ var specChoiceFinal =
 [];
 
 var numChoiceFinal =
+[];
+
+var stringFinal =
 [];
 
 var lengthChoice;
@@ -156,6 +162,7 @@ var generateBtn = document.querySelector("#generate");
           console.log("yes")
           charChoiceFinal = upperCharacters.concat(lowerCharacters)
           console.log(charChoiceFinal)
+          specValidation()
 
         } else if (charChoice === "no") {
           console.log("no")
@@ -163,7 +170,6 @@ var generateBtn = document.querySelector("#generate");
 
         } else {
           window.alert("Invalid Entry; Input must be 'yes' or 'no'");
-          validateChars();
 
         }
         return charChoice
@@ -252,30 +258,48 @@ var generateBtn = document.querySelector("#generate");
         if (numChoice === "no" && specChoice === "yes") {
           confirmFinal = charChoiceFinal.concat(specChoiceFinal);
           console.log(confirmFinal);
+          genPassword();
 
         } else if (specChoice === "no" && numChoice === "yes") {
           confirmFinal = charChoiceFinal.concat(numChoiceFinal);
           console.log(confirmFinal);
+          genPassword();
 
         } else if (specChoice === "no" && numChoice === "no") {
           confirmFinal = charChoiceFinal
           console.log(confirmFinal)
+          genPassword();
 
         } else if (numChoice && specChoice === "yes") {
           console.log("All options applied.")
-          confirmFinal = charChoiceFinal.concat(specChoiceFinal.numChoiceFinal);
-          console.log(confirmFinal);
+          confirmFinal = charChoiceFinal.concat(specChoiceFinal, numChoiceFinal);
+          genPassword();
 
       }
-      return confirmFinal
+      return
     } 
 
-    var password = "";
-    for (let i = 0; i < lengthChoice; i++) {
-    passwordText += letters.at(
-        Math.floor(Math.random() * confirmFinal.length)
-      );
+    var generatePassword = function() {
+      console.log(confirmFinal)
+      console.log(typeof confirmFinal)
+      console.log(lengthChoice)
+      for (let i = 0; i < lengthChoice; i++) {
+        var randomPass = confirmFinal[Math.floor(Math.random() * confirmFinal.length)]
+        password.push(randomPass)
+      }
+        console.log(password)
+        showPassword()
+      return
     }
+
+      var postPassword = function() {
+        stringFinal = password.join('')
+        console.log(stringFinal)
+        console.log(typeof password)
+        var passwordText = document.querySelector("#password");
+        passwordText.value = stringFinal;
+      }
+    
 
 // Write password to the #password input
 function writePassword() {
@@ -296,33 +320,14 @@ function combineArray() {
 
 function genPassword() {
   var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
 }
+
+function showPassword() {
+  var output = postPassword();
+}
+
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-// generateBtn.addEventListener("click", () => {
-//   writePassword()
-//   let letters = confirmPass;
-  
-//     if (specChoice === "yes" && numChoice === "yes") {
-//       letters += numbers, special;
-//       passwordText = generatePassword(length.value, letters)
-//     } else if (specChoice === "yes" && numChoice === "no") {
-//       letters += special;
-//       passwordText = generatePassword(length.value, letters)
-//     } else if (specChoice === "no" && numChoice === "yes") {
-//       letters += numbers;
-//       passwordText = generatePassword(length.value, letters)
-//     } else if (specChoice === "no" && numChoice === "no") {
-//       letters;
-//     } else {
-//     return
-//   };
-//   return
-// });
 
 // includes, see if something from each array is included
